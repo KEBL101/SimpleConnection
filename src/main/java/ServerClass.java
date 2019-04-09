@@ -12,7 +12,7 @@ import java.util.Date;
 public class ServerClass extends Listener {
 	
 	private static Server server;
-	private static int udpPort = 27960, tcpPort = 27961;
+	private static int udpPort = 27960, tcpPort = 27960;
 	private static String ip;
 	
 	static {
