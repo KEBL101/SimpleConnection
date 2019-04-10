@@ -3,17 +3,19 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.Scanner;
 
 public class ClientClass extends Listener {
 	
 	private static Client client;
-	private static String ip = "localhost";
-	private static int tcpPort=27961, udpPort=27960;
+	private static String ip = "169.254.157.238";
+	private static int tcpPort=27960, udpPort=27960;
 	private static boolean messageReceived = false;
 	
 	public static void main(String[] args) throws InterruptedException, IOException {
+		System.out.println("Your IP address: " + InetAddress.getLocalHost().getHostAddress().trim());
 		client = new Client();
 		client.getKryo().register(Message.class);
 		client.connect(50000, ip, tcpPort, udpPort);
