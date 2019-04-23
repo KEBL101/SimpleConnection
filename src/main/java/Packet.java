@@ -1,7 +1,7 @@
-public class Message {
+public class Packet {
 	private String message;
 	
-	Message(String message) {
+	public Packet(String message) {
 		this.message=message;
 	}
 	
