@@ -6,7 +6,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class MPServer {
-	int serverPort = 25565;
+	int serverPort = 8080;
 	Server server;
 	ServerNetworkListener snl;
 	Kryo kryo;
