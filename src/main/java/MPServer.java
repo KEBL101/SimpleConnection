@@ -6,26 +6,28 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class MPServer {
-	int serverPort = 8080;
-	Server server;
-	ServerNetworkListener snl;
-	Kryo kryo;
+	private int serverPortTCP = 8080;
+	private int serverPortUDP = 8081;
+	private Server server;
+	private ServerNetworkListener snl;
+	private Kryo kryo;
 	
 	public static void main(String[] args) throws UnknownHostException {
 		new MPServer();
 	}
 	
-	public MPServer() throws UnknownHostException {
+	private MPServer() throws UnknownHostException {
 		server = new Server();
 		System.out.println("Your IP is " + InetAddress.getLocalHost().toString());
+		registerPackets();
 		snl = new ServerNetworkListener();
 		server.addListener(snl);
 		try {
-			server.bind(serverPort, serverPort);
+			server.bind(serverPortTCP, serverPortUDP);
 		} catch (IOException e) {
+			System.out.println("Could not bind ports");
 			e.printStackTrace();
 		}
-		registerPackets();
 		server.start();
 		try {
 			server.update(1000);
@@ -34,8 +36,8 @@ public class MPServer {
 		}
 	}
 	
-	public void registerPackets() {
-		kryo = new Kryo();
-		kryo.register(Packet.class);
+	private void registerPackets() {
+		kryo = server.getKryo();
+		kryo.register(MessagePacket.class);
 	}
 }

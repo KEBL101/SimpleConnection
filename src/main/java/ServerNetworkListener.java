@@ -2,13 +2,14 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
 public class ServerNetworkListener extends Listener {
-	public ServerNetworkListener() {
+	ServerNetworkListener() {
 	
 	}
 	
 	public void connected(Connection c) {
 		System.out.println(c.getRemoteAddressTCP().getHostName() + " has connected");
-		Packet welcome = new Packet("Welcome!");
+		MessagePacket welcome = new MessagePacket();
+		welcome.message="Welcome";
 		c.sendTCP(welcome);
 	}
 	
@@ -17,9 +18,10 @@ public class ServerNetworkListener extends Listener {
 	}
 	
 	public void received(Connection c, Object o) {
-		if (o instanceof Packet) {
-			Packet packet = (Packet) o;
-			System.out.println(c.getRemoteAddressTCP().getHostName() +": " + packet.toString());
+		System.out.println("Packet received!");
+		if (o instanceof MessagePacket) {
+			MessagePacket messagePacket = (MessagePacket) o;
+			System.out.println(c.getRemoteAddressTCP().getHostName() +": " + messagePacket.toString());
 		}
 	}
 }

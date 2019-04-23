@@ -5,13 +5,14 @@ import com.esotericsoftware.kryonet.Listener;
 public class ClientNetworkListener extends Listener {
 	private Client client;
 	
-	public void init(Client client) {
+	void init(Client client) {
 		this.client=client;
 	}
 	
 	public void connected(Connection connection) {
 		System.out.println("[CLIENT] >> You have connected to " + connection.getRemoteAddressTCP().getHostName());
-		Packet message = new Packet("Hello!");
+		MessagePacket message = new MessagePacket();
+		message.message="Hello";
 		client.sendTCP(message);
 		System.out.println("Hello message sent to server");
 	}
@@ -21,8 +22,8 @@ public class ClientNetworkListener extends Listener {
 	}
 	
 	public void received(Connection connection, Object object) {
-		if (object instanceof Packet) {
-			Packet message = (Packet) object;
+		if (object instanceof MessagePacket) {
+			MessagePacket message = (MessagePacket) object;
 			System.out.println("[SERVER] >> " + message.toString());
 		}
 	}
