@@ -23,8 +23,7 @@ public class MPClient {
 		client = new Client();
 		cnl = new ClientNetworkListener();
 		cnl.init(client);
-		kryo = client.getKryo();
-		kryo.register(MessagePacket.class);
+		registerPacket();
 		client.addListener(cnl);
 		client.start();
 		MessagePacket messagePacket = new MessagePacket();

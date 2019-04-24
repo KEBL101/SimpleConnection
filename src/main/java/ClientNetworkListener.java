@@ -24,7 +24,7 @@ public class ClientNetworkListener extends Listener {
 	public void received(Connection connection, Object object) {
 		if (object instanceof MessagePacket) {
 			MessagePacket message = (MessagePacket) object;
-			System.out.println("[SERVER] >> " + message.toString());
+			System.out.println("[" +connection.getRemoteAddressTCP().getHostName()+ "] >> " + message.toString());
 		}
 	}
 }
