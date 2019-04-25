@@ -4,6 +4,7 @@ import com.esotericsoftware.kryonet.Server;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class MPServer {
 	private int serverPortTCP = 8080;
@@ -33,6 +34,12 @@ public class MPServer {
 			server.update(1000);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		MessagePacket messagePacket = new MessagePacket();
+		Scanner keyboard = new Scanner(System.in);
+		while(true) {
+			messagePacket.message=keyboard.nextLine();
+			server.sendToAllTCP(messagePacket);
 		}
 	}
 	

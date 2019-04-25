@@ -5,6 +5,7 @@ import com.esotericsoftware.kryonet.Client;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class MPClient {
 	private int portSocketTCP = 8080;
@@ -20,6 +21,7 @@ public class MPClient {
 	}
 	
 	private MPClient() throws UnknownHostException {
+		Scanner keyboard = new Scanner(System.in);
 		client = new Client();
 		cnl = new ClientNetworkListener();
 		cnl.init(client);
@@ -34,6 +36,10 @@ public class MPClient {
 			client.sendTCP(messagePacket);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		while(true) {
+			messagePacket.message=keyboard.nextLine();
+			client.sendTCP(messagePacket);
 		}
 	}
 	
