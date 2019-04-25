@@ -20,7 +20,7 @@ public class ServerNetworkListener extends Listener {
 	public void received(Connection c, Object o) {
 		if (o instanceof MessagePacket) {
 			MessagePacket messagePacket = (MessagePacket) o;
-			System.out.println(c.getRemoteAddressTCP().getHostName() +": " + messagePacket.toString());
+			System.out.println("[" + c.getRemoteAddressTCP().getHostName() +"] >> " + messagePacket.toString());
 		}
 	}
 }
